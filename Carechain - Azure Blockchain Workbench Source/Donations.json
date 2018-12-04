@@ -1,0 +1,233 @@
+{
+  "ApplicationName": "PRDonations",
+  "DisplayName": "Puerto Rico SPS Donations Blockchain",
+  "Description": "An application to track donations to the tech and science groups in PR",
+  "ApplicationRoles": [
+    {
+      "Name": "Processor",
+      "Description": "A person processing a donation."
+    },
+    {
+      "Name": "Receiver",
+      "Description": "A person or organization receiving a donation"
+    }
+  ],
+  "Workflows": [
+    {
+      "Name": "ProcessDonation",
+      "DisplayName": "Process Donation",
+      "Description": "A simple workflow to send a donation and receive a response.",
+      "Initiators": [ "Processor" ],
+      "StartState": "Request",
+      "Properties": [
+        {
+          "Name": "Status",
+          "DisplayName": "Status",
+          "Description": "Holds the status of the donation.",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "Amount",
+          "DisplayName": "Amount",
+          "Description": "Holds the amount of the donation.",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "Destination",
+          "DisplayName": "Destination",
+          "Description": "Holds the destination of the donation.",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract.",
+          "Type": {
+            "Name": "state"
+          }
+        },
+        {
+          "Name": "Processor",
+          "DisplayName": "Processor",
+          "Description": "A person sending a request.",
+          "Type": {
+            "Name": "Processor"
+          }
+        },
+        {
+          "Name": "Receiver",
+          "DisplayName": "Receiver",
+          "Description": "A person sending a response.",
+          "Type": {
+            "Name": "Receiver"
+          }
+        },
+        {
+          "Name": "RequestMessage",
+          "DisplayName": "Request Message",
+          "Description": "A request message.",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "ResponseMessage",
+          "DisplayName": "Response Message",
+          "Description": "A response message.",
+          "Type": {
+            "Name": "string"
+          }
+        }
+      ],
+        "Constructor": {
+        "Parameters": [
+          {
+            "Name": "message",
+            "Description": "...",
+            "DisplayName": "Note",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "amount",
+            "Description": "...",
+            "DisplayName": "Donation Amount",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "destination",
+            "Description": "...",
+            "DisplayName": "Destination Organization",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "status",
+            "Description": "...",
+            "DisplayName": "Current Status",
+            "Type": {
+              "Name": "string"
+            }
+          }
+        ]
+      },
+      "Functions": [
+        {
+          "Name": "SendRequest",
+          "DisplayName": "Send Donation",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "requestMessage",
+              "Description": "...",
+              "DisplayName": "Request Message",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "requestStatus",
+              "Description": "...",
+              "DisplayName": "Request Status",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "requestDestination",
+              "Description": "...",
+              "DisplayName": "Request Organization",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "requestAmount",
+              "Description": "...",
+              "DisplayName": "Request Amount",
+              "Type": {
+                "Name": "string"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SendResponse",
+          "DisplayName": "Donation Response",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "responseMessage",
+              "Description": "...",
+              "DisplayName": "Response Note",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "responseStatus",
+              "Description": "...",
+              "DisplayName": "Response Status",
+              "Type": {
+                "Name": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "States": [
+        {
+          "Name": "Request",
+          "DisplayName": "Request",
+          "Description": "...",
+          "PercentComplete": 50,
+          "Value": 0,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": ["Receiver"],
+              "AllowedInstanceRoles": [],
+              "Description": "...",
+              "Function": "SendResponse",
+              "NextStates": [ "Respond" ],
+              "DisplayName": "Send Response"
+            }
+          ]
+        },
+        {
+          "Name": "Respond",
+          "DisplayName": "Respond",
+          "Description": "...",
+          "PercentComplete": 90,
+          "Value": 1,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": ["Processor"],
+              "Description": "...",
+              "Function": "SendRequest",
+              "NextStates": [ "Request" ],
+              "DisplayName": "Send Request"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  }
+
+
+  
+
+
